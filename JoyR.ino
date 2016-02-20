@@ -10,7 +10,7 @@ void timerIsr() {
 
 int encoderState(){ 
 value += encoder->getValue();
-  if (value - last == 4) { 
+  if (value - last != 0) { 
                         // Each tick the value changes 4 times, 
                         //Sometimes it does 3 if you shake 
                         //it voilently and thurn really slowly
