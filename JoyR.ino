@@ -41,8 +41,9 @@ void setup() {
 }
 
 void loop() {  
-  dataForController_t controllerData = getControllerData();
-  setControllerData(controllerData);
+	dataForController_t = getBlankDataForController(); // reset everything
+  	dataForController_t controllerData = getControllerData();
+  	setControllerData(controllerData);
 }
 dataForController_t getControllerData(void){
   
