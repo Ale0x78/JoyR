@@ -8,6 +8,32 @@ void timerIsr() {
   encoder->service();
 }
 
+//Pins 
+int armLiftPins[] = [2,3,4,5,6]
+int flyWheePins[] = [7,8,9,10]
+int PID = 11;
+
+
+/* Referance 
+
+The digital pins are counting from the lowest button to the highest
+The analog pins are as follows
+High Goal A3
+Low  Goal A2
+Auto Aim right A4
+Auto Aim left A5
+arm lift A1 (lower) A0 (higher)
+*/
+void pinSetup(){
+  for (int i =0; i < armLiftPins.length(); i++){
+    pinMode(armLiftPins[i], INPUT);    
+  }
+  for (int i =0; i < flyWheePins.length(); i++){
+    pinMode(flyWheePins[i], INPUT);    
+  }
+  pinMode(PID, INPUT);    
+}
+
 int encoderState(){ 
 value += encoder->getValue();
   if (value - last != 0) { 
@@ -31,7 +57,7 @@ value += encoder->getValue();
 void setup() {
   Serial.begin(9600);
   encoder = new ClickEncoder(A1, A0, A2);
-
+  pinSetup();
   Timer1.initialize(1000);
   Timer1.attachInterrupt(timerIsr); 
   
