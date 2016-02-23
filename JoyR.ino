@@ -1,6 +1,6 @@
 #include <ClickEncoder.h>
 #include <TimerOne.h>
-
+#include <UnoJoy.h>
 ClickEncoder *encoder;
 int16_t last, value;
 
@@ -9,10 +9,10 @@ void timerIsr() {
 }
 
 //Pins 
-int armLiftPins[] = {2,3,4,5,6}
-int flyWheePins[] = {7,8,9,10}
+int armLiftPins[] = {2,3,4,5,6};
+int flyWheePins[] = {7,8,9,10};
 int PID = 11;
-int encoder[] = {12,13}
+int encoderPin[] = {12,13};
 int hGoal = A3;
 int lGoal = A2;
 int lAutoAim = A5;
@@ -30,10 +30,10 @@ Auto Aim left A5
 arm lift A1 (lower) A0 (higher)
 */
 void pinSetup(){
-  for (int i =0; i < armLiftPins.length(); i++){
+  for (int i =0; i < 5; i++){
     pinMode(armLiftPins[i], INPUT);    
   }
-  for (int i =0; i < flyWheePins.length(); i++){
+  for (int i =0; i < 4; i++){
     pinMode(flyWheePins[i], INPUT);    
   }
   pinMode(PID, INPUT);    
@@ -72,7 +72,7 @@ void setup() {
 }
 
 void loop() {  
-	dataForController_t = getBlankDataForController(); // reset everything
+	//dataForController_t = getBlankDataForController(); // reset everything
   	dataForController_t controllerData = getControllerData();
   	setControllerData(controllerData);
 }
@@ -91,7 +91,7 @@ dataForController_t getControllerData(void){
   controllerData.dpadLeftOn = false;
   controllerData.dpadRightOn = false;
 
-  ES = encoderState();
+ int ES = encoderState();
 
   if(ES == -1){
     controllerData.circleOn = true;
@@ -100,8 +100,7 @@ dataForController_t getControllerData(void){
   }
 
 
-  
-  controllerData.startOn = !digitalRead(StartPin);
+ 
 
 
 
