@@ -9,9 +9,14 @@ void timerIsr() {
 }
 
 //Pins 
-int armLiftPins[] = [2,3,4,5,6]
-int flyWheePins[] = [7,8,9,10]
+int armLiftPins[] = {2,3,4,5,6}
+int flyWheePins[] = {7,8,9,10}
 int PID = 11;
+int encoder[] = {12,13}
+int hGoal = A3;
+int lGoal = A2;
+int lAutoAim = A5;
+int rAutoAim = A4;
 
 
 /* Referance 
